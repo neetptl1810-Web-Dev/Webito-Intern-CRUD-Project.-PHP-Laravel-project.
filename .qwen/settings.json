@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(type *)",
+      "Bash(echo.)",
+      "Bash(echo *)",
+      "Bash(php *)",
+      "Bash(dir *)",
+      "Bash(del *)"
+    ]
+  },
+  "$version": 3
+}

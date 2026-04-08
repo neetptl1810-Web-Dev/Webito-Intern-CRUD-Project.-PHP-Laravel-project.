@@ -1,0 +1,1429 @@
+/* =========================================
+   🎨 Advanced Dashboard & Profile Styles
+   🧑‍💻 Neet Patel - Full Stack Developer
+   ========================================= */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* =========================================
+   🎨 CSS Variables & Design System
+   ========================================= */
+:root {
+    /* Primary Colors */
+    --np-primary: #667eea;
+    --np-primary-light: #7c91f2;
+    --np-primary-dark: #5568d3;
+    --np-secondary: #764ba2;
+    --np-secondary-light: #8b6bb5;
+    --np-secondary-dark: #623d8a;
+
+    /* Gradient */
+    --np-gradient: linear-gradient(135deg, var(--np-primary) 0%, var(--np-secondary) 100%);
+    --np-gradient-reverse: linear-gradient(135deg, var(--np-secondary) 0%, var(--np-primary) 100%);
+    --np-gradient-horizontal: linear-gradient(90deg, var(--np-primary) 0%, var(--np-secondary) 100%);
+
+    /* Text Colors */
+    --np-text-primary: #1a202c;
+    --np-text-secondary: #4a5568;
+    --np-text-muted: #718096;
+    --np-text-inverse: #ffffff;
+
+    /* Background Colors */
+    --np-bg-primary: #ffffff;
+    --np-bg-secondary: #f7fafc;
+    --np-bg-tertiary: #edf2f7;
+    --np-bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+
+    /* Border & Shadow */
+    --np-border: 1px solid rgba(226, 232, 240, 0.8);
+    --np-border-accent: 2px solid var(--np-primary);
+    --np-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --np-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --np-shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --np-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --np-shadow-glow: 0 0 20px rgba(102, 126, 234, 0.3);
+    --np-shadow-glow-secondary: 0 0 20px rgba(118, 75, 162, 0.3);
+
+    /* Border Radius */
+    --np-radius-sm: 8px;
+    --np-radius: 12px;
+    --np-radius-lg: 20px;
+    --np-radius-full: 9999px;
+
+    /* Transitions */
+    --np-transition-fast: 150ms ease;
+    --np-transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --np-transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Animation Timing */
+    --np-ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --np-ease-bounce: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --np-text-primary: #f7fafc;
+        --np-text-secondary: #e2e8f0;
+        --np-text-muted: #a0aec0;
+        --np-bg-primary: #1a202c;
+        --np-bg-secondary: #2d3748;
+        --np-bg-tertiary: #4a5568;
+        --np-border: 1px solid rgba(74, 85, 104, 0.5);
+        --np-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        --np-shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* =========================================
+   🌟 Base Styles & Reset
+   ========================================= */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--np-bg-gradient);
+    color: var(--np-text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* =========================================
+   🌊 Waves Animation Layer - BIGGER WAVES
+   ========================================= */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        /* Wave 1 - Large Bottom Wave */
+        radial-gradient(ellipse at 50% 110%, rgba(102, 126, 234, 0.08) 0%, transparent 70%),
+        /* Wave 2 - Large Top Right Wave */
+        radial-gradient(ellipse at 110% -10%, rgba(118, 75, 162, 0.07) 0%, transparent 65%),
+        /* Wave 3 - Large Top Left Wave */
+        radial-gradient(ellipse at -10% -10%, rgba(102, 126, 234, 0.06) 0%, transparent 60%),
+        /* Wave 4 - Extra Large Center Wave */
+        radial-gradient(ellipse at 50% 50%, rgba(167, 139, 250, 0.04) 0%, transparent 75%),
+        /* Subtle mesh pattern */
+        repeating-linear-gradient(135deg,
+            transparent,
+            transparent 3px,
+            rgba(102, 126, 234, 0.02) 3px,
+            rgba(102, 126, 234, 0.02) 6px);
+    background-size:
+        300% 300%,
+        /* Larger waves */
+        300% 300%,
+        300% 300%,
+        400% 400%,
+        /* Extra large center wave */
+        150px 150px;
+    /* Larger mesh pattern */
+    animation:
+        waveFlow 30s ease-in-out infinite,
+        meshDrift 50s linear infinite;
+    pointer-events: none;
+    z-index: -2;
+    opacity: 0.95;
+}
+
+/* Wave Flow Animation - Smoother, Larger Movement */
+@keyframes waveFlow {
+
+    0%,
+    100% {
+        background-position:
+            50% 110%,
+            110% -10%,
+            -10% -10%,
+            50% 50%,
+            0 0;
+    }
+
+    25% {
+        background-position:
+            53% 105%,
+            105% -5%,
+            -5% -5%,
+            52% 52%,
+            15px 15px;
+    }
+
+    50% {
+        background-position:
+            50% 100%,
+            110% -10%,
+            -10% -10%,
+            50% 50%,
+            30px 30px;
+    }
+
+    75% {
+        background-position:
+            47% 105%,
+            105% -5%,
+            -5% -5%,
+            48% 48%,
+            15px 15px;
+    }
+}
+
+/* Mesh Pattern Drift - Slower for bigger waves */
+@keyframes meshDrift {
+    0% {
+        background-position: 50% 110%, 110% -10%, -10% -10%, 50% 50%, 0 0;
+    }
+
+    100% {
+        background-position: 50% 110%, 110% -10%, -10% -10%, 50% 50%, 150px 150px;
+    }
+}
+
+/* =========================================
+   💨 Wind Particles Layer - Match Big Waves
+   ========================================= */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        /* Wider wind streaks */
+        repeating-linear-gradient(90deg,
+            transparent 0px,
+            transparent 120px,
+            rgba(255, 255, 255, 0.04) 120px,
+            rgba(255, 255, 255, 0.04) 124px),
+        /* Larger floating particles */
+        radial-gradient(3px 3px at 15% 30%, rgba(255, 255, 255, 0.5) 100%, transparent),
+        radial-gradient(3px 3px at 35% 70%, rgba(255, 255, 255, 0.4) 100%, transparent),
+        radial-gradient(3px 3px at 55% 20%, rgba(255, 255, 255, 0.6) 100%, transparent),
+        radial-gradient(3px 3px at 75% 85%, rgba(255, 255, 255, 0.5) 100%, transparent),
+        radial-gradient(3px 3px at 90% 45%, rgba(255, 255, 255, 0.4) 100%, transparent),
+        radial-gradient(3px 3px at 10% 60%, rgba(255, 255, 255, 0.5) 100%, transparent),
+        radial-gradient(3px 3px at 45% 15%, rgba(255, 255, 255, 0.6) 100%, transparent),
+        radial-gradient(3px 3px at 65% 95%, rgba(255, 255, 255, 0.4) 100%, transparent);
+    background-size:
+        500% 100%,
+        /* Wider wind streaks */
+        100% 100%;
+    /* Particles */
+    animation:
+        windFlow 35s linear infinite,
+        particlesDrift 50s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.75;
+}
+
+/* Wind Flow Animation - Adjusted for bigger scale */
+@keyframes windFlow {
+    0% {
+        background-position:
+            0% 50%,
+            15% 30%, 35% 70%, 55% 20%, 75% 85%,
+            90% 45%, 10% 60%, 45% 15%, 65% 95%;
+    }
+
+    100% {
+        background-position:
+            500% 50%,
+            115% 30%, 135% 70%, 155% 20%, 175% 85%,
+            190% 45%, 110% 60%, 145% 15%, 165% 95%;
+    }
+}
+
+/* Particles Drift Animation - Gentle floating */
+@keyframes particlesDrift {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: translateY(0) translateX(0);
+    }
+
+    25% {
+        opacity: 0.8;
+        transform: translateY(-2%) translateX(1%);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: translateY(2%) translateX(-1%);
+    }
+
+    75% {
+        opacity: 0.75;
+        transform: translateY(-1%) translateX(2%);
+    }
+}
+
+/* =========================================
+   ✨ Floating Orb Accents - Larger Size
+   ========================================= */
+.np-wind-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    /* Slightly more blur for bigger orbs */
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.18;
+    /* Slightly more visible */
+    animation: orbFloat 40s ease-in-out infinite;
+}
+
+.np-wind-orb-1 {
+    width: 450px;
+    /* Increased from 300px */
+    height: 450px;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.5) 0%, transparent 75%);
+    top: 15%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.np-wind-orb-2 {
+    width: 350px;
+    /* Increased from 200px */
+    height: 350px;
+    background: radial-gradient(circle, rgba(118, 75, 162, 0.5) 0%, transparent 75%);
+    bottom: 25%;
+    right: 10%;
+    animation-delay: -15s;
+}
+
+.np-wind-orb-3 {
+    width: 250px;
+    /* Increased from 150px */
+    height: 250px;
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.4) 0%, transparent 75%);
+    top: 55%;
+    left: 65%;
+    animation-delay: -30s;
+}
+
+@keyframes orbFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.18;
+    }
+
+    25% {
+        transform: translate(4%, -3%) scale(1.08);
+        opacity: 0.22;
+    }
+
+    50% {
+        transform: translate(-3%, 4%) scale(0.92);
+        opacity: 0.15;
+    }
+
+    75% {
+        transform: translate(-4%, -2%) scale(1.05);
+        opacity: 0.2;
+    }
+}
+
+/* =========================================
+   🚀 Dashboard Wrapper & Layout
+   ========================================= */
+.dashboard-wrapper {
+    min-height: 100vh;
+    background: transparent;
+    /* Let background layers show through */
+    position: relative;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    z-index: 1;
+    /* Ensure content is above background */
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    background: var(--np-bg-primary);
+    border-radius: var(--np-radius-lg);
+    box-shadow: var(--np-shadow);
+    border: var(--np-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--np-gradient-horizontal);
+}
+
+.dashboard-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--np-text-primary);
+    margin: 0 0 0.5rem 0;
+    position: relative;
+}
+
+.dashboard-header .text-muted {
+    color: var(--np-text-muted);
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* =========================================
+   🧭 Navigation Bar
+   ========================================= */
+.navbar {
+    background: var(--np-bg-primary);
+    border-radius: var(--np-radius);
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--np-shadow);
+    border: var(--np-border);
+    position: sticky;
+    top: 1rem;
+    z-index: 100;
+}
+
+.nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.nav-item {
+    margin: 0;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    color: var(--np-text-secondary);
+    text-decoration: none;
+    border-radius: var(--np-radius-full);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all var(--np-transition-fast);
+    background: transparent;
+    border: 2px solid transparent;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--np-primary);
+    background: rgba(102, 126, 234, 0.1);
+    border-color: var(--np-primary);
+    transform: translateY(-2px);
+}
+
+.nav-link i {
+    font-size: 1rem;
+    transition: transform var(--np-transition-fast);
+}
+
+.nav-link:hover i {
+    transform: scale(1.1);
+}
+
+/* =========================================
+   📦 Dashboard Cards
+   ========================================= */
+.dashboard-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.dashboard-card {
+    background: var(--np-bg-primary);
+    border-radius: var(--np-radius);
+    padding: 1.5rem;
+    box-shadow: var(--np-shadow);
+    border: var(--np-border);
+    transition: all var(--np-transition);
+}
+
+.dashboard-card:hover {
+    box-shadow: var(--np-shadow-md);
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   🎭 Profile Header - Glassmorphism
+   ========================================= */
+.np-profile-header {
+    position: relative;
+    background: var(--np-gradient);
+    border-radius: var(--np-radius-lg);
+    color: var(--np-text-inverse);
+    padding: 40px 30px;
+    margin: 20px;
+    text-align: center;
+    box-shadow: var(--np-shadow-lg), var(--np-shadow-glow);
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    transition: transform var(--np-transition), box-shadow var(--np-transition);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.np-profile-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+    animation: np-shimmer 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes np-shimmer {
+
+    0%,
+    100% {
+        transform: rotate(0deg) translateX(-25%);
+    }
+
+    50% {
+        transform: rotate(180deg) translateX(25%);
+    }
+}
+
+.np-profile-header:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--np-shadow-lg), var(--np-shadow-glow-secondary);
+}
+
+.np-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    margin: 0 auto 20px;
+    background: var(--np-gradient-reverse);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--np-transition);
+}
+
+.np-avatar::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg) translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.np-avatar:hover::after {
+    transform: rotate(45deg) translateX(100%);
+}
+
+.np-avatar:hover {
+    transform: scale(1.05) rotate(5deg);
+}
+
+.np-name {
+    font-weight: 800;
+    font-size: 2.2rem;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: inline-block;
+}
+
+.np-name::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--np-text-inverse);
+    border-radius: var(--np-radius-full);
+    opacity: 0.8;
+}
+
+.np-role {
+    font-weight: 400;
+    font-size: 1.15rem;
+    opacity: 0.95;
+    margin: 15px 0 25px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.np-contact-grid {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.np-contact-pill {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: var(--np-radius-full);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all var(--np-transition);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.np-contact-pill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.np-contact-pill:hover::before {
+    left: 100%;
+}
+
+.np-contact-pill:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.np-contact-pill:active {
+    transform: translateY(-1px);
+}
+
+.np-contact-pill svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* =========================================
+   📐 Section Titles with Animation
+   ========================================= */
+.np-section-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--np-text-primary);
+    font-size: 1.4rem;
+    position: relative;
+    padding: 15px 0 15px 20px;
+    margin: 40px 0 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.np-section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 80%;
+    background: var(--np-gradient);
+    border-radius: var(--np-radius-full);
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+    animation: np-title-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes np-title-glow {
+    from {
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+    }
+
+    to {
+        box-shadow: 0 0 20px rgba(118, 75, 162, 0.8);
+    }
+}
+
+.np-section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, var(--np-primary), transparent);
+    margin-left: 15px;
+    opacity: 0.3;
+}
+
+/* =========================================
+   ⚡ Skill Badges - Interactive & Animated
+   ========================================= */
+.np-skills-container {
+    margin-bottom: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.np-skill-badge {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: var(--np-radius-full);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all var(--np-transition);
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.np-skill-badge::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: var(--np-gradient);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity var(--np-transition-fast);
+}
+
+.np-skill-badge:hover::before {
+    opacity: 1;
+}
+
+.np-skill-badge:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: var(--np-shadow-md), var(--np-shadow-glow);
+    color: white !important;
+}
+
+.np-skill-badge:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Skill Colors with Gradient Borders */
+.skill-laravel {
+    background: linear-gradient(135deg, #ff2d20 0%, #ff4d4d 100%);
+    color: white;
+}
+
+.skill-php {
+    background: linear-gradient(135deg, #777bb4 0%, #888cc5 100%);
+    color: white;
+}
+
+.skill-mysql {
+    background: linear-gradient(135deg, #00758f 0%, #0095b5 100%);
+    color: white;
+}
+
+.skill-bootstrap {
+    background: linear-gradient(135deg, #7952b3 0%, #8b6bc5 100%);
+    color: white;
+}
+
+.skill-git {
+    background: linear-gradient(135deg, #f05032 0%, #f26650 100%);
+    color: white;
+}
+
+.skill-js {
+    background: linear-gradient(135deg, #f7df1e 0%, #ffeb3b 100%);
+    color: var(--np-text-primary);
+}
+
+.skill-default {
+    background: var(--np-bg-tertiary);
+    color: var(--np-text-secondary);
+    border: 2px solid var(--np-border);
+}
+
+.skill-default:hover {
+    background: var(--np-gradient);
+    color: white;
+}
+
+.np-skill-badge svg {
+    width: 14px;
+    height: 14px;
+    transition: transform var(--np-transition-fast);
+}
+
+.np-skill-badge:hover svg {
+    transform: scale(1.2) rotate(10deg);
+}
+
+/* =========================================
+   📋 Info Cards - Experience & Education
+   ========================================= */
+.np-info-card {
+    background: var(--np-bg-primary);
+    border-radius: var(--np-radius);
+    padding: 24px;
+    margin-bottom: 18px;
+    border: var(--np-border);
+    border-left: 4px solid var(--np-primary);
+    box-shadow: var(--np-shadow);
+    transition: all var(--np-transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.np-info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--np-gradient-horizontal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--np-transition);
+}
+
+.np-info-card:hover {
+    transform: translateX(8px);
+    box-shadow: var(--np-shadow-md), 0 0 0 1px rgba(102, 126, 234, 0.1);
+    border-left-color: var(--np-secondary);
+}
+
+.np-info-card:hover::before {
+    transform: scaleX(1);
+}
+
+.np-info-card h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--np-text-primary);
+    margin: 0 0 6px 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.np-info-card h6::before {
+    content: '▹';
+    color: var(--np-primary);
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all var(--np-transition-fast);
+}
+
+.np-info-card:hover h6::before {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.np-role-badge {
+    display: inline-block;
+    background: var(--np-primary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.np-info-card .np-date {
+    font-size: 0.85rem;
+    color: var(--np-secondary);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 12px;
+    padding: 4px 12px;
+    background: rgba(118, 75, 162, 0.1);
+    border-radius: var(--np-radius-full);
+}
+
+.np-info-card .np-date::before {
+    content: '📅';
+    font-size: 0.9rem;
+}
+
+.np-info-card p {
+    font-size: 0.95rem;
+    color: var(--np-text-secondary);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Achievement List */
+.np-achievement-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0 0;
+}
+
+.np-achievement-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--np-text-secondary);
+    line-height: 1.5;
+}
+
+.np-achievement-list li i {
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+    color: #10b981;
+}
+
+.np-achievement-list strong {
+    color: var(--np-text-primary);
+    font-weight: 600;
+}
+
+/* =========================================
+   🎯 Welcome Message & Action Buttons
+   ========================================= */
+.welcome-message h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.75rem 0;
+    color: var(--np-text-primary);
+    font-size: 1.25rem;
+}
+
+.welcome-message p {
+    color: var(--np-text-secondary);
+    margin: 0;
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--np-radius);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all var(--np-transition-fast);
+    cursor: pointer;
+    border: none;
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background: var(--np-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--np-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--np-shadow-glow);
+}
+
+.btn-outline-secondary {
+    background: transparent;
+    color: var(--np-text-secondary);
+    border: 2px solid var(--np-border);
+}
+
+.btn-outline-secondary:hover {
+    border-color: var(--np-primary);
+    color: var(--np-primary);
+    background: rgba(102, 126, 234, 0.05);
+}
+
+/* =========================================
+   🚪 Logout Button
+   ========================================= */
+.logout-form {
+    margin: 0;
+}
+
+.logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #e53e3e;
+    color: white;
+    border: none;
+    border-radius: var(--np-radius-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--np-transition-fast);
+    font-size: 0.9rem;
+}
+
+.logout-btn:hover {
+    background: #c53030;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
+}
+
+.logout-btn i {
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   🦶 Footer
+   ========================================= */
+.dashboard-footer {
+    margin-top: auto;
+    padding-top: 2rem;
+    text-align: center;
+    color: var(--np-text-muted);
+    font-size: 0.85rem;
+}
+
+/* =========================================
+   🎨 Additional Components
+   ========================================= */
+
+/* Progress Bars for Skills */
+.np-progress-container {
+    margin: 20px 0;
+}
+
+.np-progress-item {
+    margin-bottom: 15px;
+}
+
+.np-progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--np-text-secondary);
+}
+
+.np-progress-bar {
+    height: 8px;
+    background: var(--np-bg-tertiary);
+    border-radius: var(--np-radius-full);
+    overflow: hidden;
+    position: relative;
+}
+
+.np-progress-fill {
+    height: 100%;
+    background: var(--np-gradient);
+    border-radius: var(--np-radius-full);
+    width: 0;
+    transition: width 1s var(--np-ease-elastic);
+    position: relative;
+}
+
+.np-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: np-progress-shine 2s infinite;
+}
+
+@keyframes np-progress-shine {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Timeline for Experience */
+.np-timeline {
+    position: relative;
+    padding-left: 30px;
+    margin: 20px 0;
+}
+
+.np-timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: var(--np-gradient-horizontal);
+}
+
+.np-timeline-item {
+    position: relative;
+    padding-bottom: 25px;
+}
+
+.np-timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--np-primary);
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px var(--np-primary);
+    transition: transform var(--np-transition-fast);
+}
+
+.np-timeline-item:hover::before {
+    transform: scale(1.3);
+}
+
+/* =========================================
+   🎭 Animations & Effects
+   ========================================= */
+
+/* Fade In Up Animation */
+@keyframes np-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.np-animate {
+    animation: np-fadeInUp 0.6s var(--np-ease-elastic) forwards;
+    opacity: 0;
+}
+
+.np-animate:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.np-animate:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.np-animate:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.np-animate:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.np-animate:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+/* Pulse Animation */
+@keyframes np-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+.np-pulse {
+    animation: np-pulse 2s ease-in-out infinite;
+}
+
+/* Bounce Animation */
+@keyframes np-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.np-bounce {
+    animation: np-bounce 2s ease-in-out infinite;
+}
+
+/* =========================================
+   📱 Responsive Design
+   ========================================= */
+@media (max-width: 1024px) {
+    .dashboard-wrapper {
+        padding: 1.5rem;
+    }
+
+    .np-profile-header {
+        margin: 15px;
+        padding: 30px 20px;
+    }
+
+    .np-name {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-wrapper {
+        padding: 1rem;
+    }
+
+    .dashboard-header {
+        padding: 1rem;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.4rem;
+    }
+
+    .navbar {
+        padding: 0.75rem 1rem;
+        position: static;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-link {
+        justify-content: center;
+        padding: 0.6rem 1rem;
+    }
+
+    .np-profile-header {
+        margin: 10px;
+        padding: 25px 15px;
+        border-radius: var(--np-radius);
+    }
+
+    .np-avatar {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+    }
+
+    .np-name {
+        font-size: 1.5rem;
+    }
+
+    .np-role {
+        font-size: 1rem;
+    }
+
+    .np-contact-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .np-contact-pill {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+
+    .np-section-title {
+        font-size: 1.2rem;
+        margin: 30px 0 20px;
+    }
+
+    .np-info-card {
+        padding: 20px;
+    }
+
+    .np-skills-container {
+        justify-content: center;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    .dashboard-wrapper {
+        padding: 0.75rem;
+    }
+
+    .np-profile-header {
+        margin: 5px;
+        padding: 20px 15px;
+    }
+
+    .np-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+
+    .np-name {
+        font-size: 1.3rem;
+    }
+
+    .np-section-title {
+        font-size: 1.1rem;
+    }
+
+    .np-skill-badge {
+        font-size: 0.8rem;
+        padding: 8px 14px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.2rem;
+    }
+}
+
+/* =========================================
+   ♿ Accessibility & Focus States
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus Visible for Keyboard Navigation */
+.np-contact-pill:focus-visible,
+.np-skill-badge:focus-visible,
+.np-interest-tag:focus-visible,
+.nav-link:focus-visible,
+.btn:focus-visible,
+.logout-btn:focus-visible {
+    outline: 3px solid var(--np-primary);
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --np-border: 2px solid var(--np-text-primary);
+        --np-shadow: none;
+    }
+
+    .np-skill-badge,
+    .np-interest-tag {
+        border-width: 3px;
+    }
+}
+
+/* Print Styles */
+@media print {
+
+    body::before,
+    .np-particles {
+        display: none;
+    }
+
+    .np-profile-header {
+        background: var(--np-primary) !important;
+        color: white !important;
+        box-shadow: none !important;
+    }
+
+    .np-info-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+
+    .navbar,
+    .action-buttons,
+    .logout-form {
+        display: none;
+    }
+} 
+"" 

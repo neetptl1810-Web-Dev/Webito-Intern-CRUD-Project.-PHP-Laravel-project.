@@ -1,0 +1,10 @@
+﻿=== ALL PRODUCTS (raw) ===
+ID: 4, Name: Fan, company_id: 1, stock: out_of_stock
+
+=== ALL COMPANIES (raw) ===
+ID: 1, Name: Neet, Slug: neet
+ID: 2, Name: Neet Patel, Slug: neet-patel
+ID: 3, Name: Test, Slug: test
+
+=== PRODUCTS TABLE COLUMNS ===
+id, company_id, name, type, price, stock_status, description, image, created_at, updated_at

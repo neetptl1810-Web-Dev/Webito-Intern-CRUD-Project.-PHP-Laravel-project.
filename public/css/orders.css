@@ -1,0 +1,276 @@
+/* =========================================
+   📋 Orders Page - Premium Styling
+   ✨ Matches Neet Patel Design System
+   ========================================= */
+
+/* =========================================
+   🏷️ Status Badges
+   ========================================= */
+.payment-badge,
+.delivery-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--np-radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--np-font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  box-shadow: var(--np-shadow-sm);
+  transition: transform var(--np-transition-fast);
+}
+
+.payment-badge:hover,
+.delivery-badge:hover {
+  transform: translateY(-1px);
+}
+
+/* Payment Method Badges */
+.payment-cod {
+  color: white;
+}
+
+.payment-online {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+/* Delivery Status Badges */
+.delivery-pending {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+}
+
+.delivery-processing {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+.delivery-shipped {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  color: white;
+}
+
+.delivery-delivered {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.delivery-cancelled {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+}
+
+.delivery-no_response {
+  background: linear-gradient(135deg, #64748b, #475569);
+  color: white;
+}
+
+/* =========================================
+   📦 Order Details Modal
+   ========================================= */
+.modal-lg {
+  max-width: 750px !important;
+  width: 95%;
+}
+
+.modal-loading {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--np-text-muted);
+}
+
+.modal-loading .np-spinner {
+  margin: 0 auto 1rem;
+}
+
+/* Order Details Layout */
+.order-details {
+  padding: 0.5rem 0;
+}
+
+.order-details .detail-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.875rem 0;
+  border-bottom: var(--np-border);
+  gap: 1.5rem;
+  transition: background var(--np-transition-fast);
+}
+
+.order-details .detail-row:last-child {
+  border-bottom: none;
+}
+
+.order-details .detail-row:hover {
+  background: rgba(99, 102, 241, 0.03);
+  border-radius: var(--np-radius-sm);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  margin: 0 -0.75rem;
+}
+
+.order-details .detail-row label {
+  font-weight: 600;
+  color: var(--np-text-muted);
+  font-size: 0.875rem;
+  min-width: 150px;
+  font-family: var(--np-font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.order-details .detail-row span,
+.order-details .detail-row p {
+  color: var(--np-text-primary);
+  font-weight: 500;
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.order-details .detail-row p {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Section Headers */
+.order-details h4 {
+  font-family: var(--np-font-heading);
+  font-weight: 700;
+  color: var(--np-text-primary);
+  font-size: 1.25rem;
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: var(--np-border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Products Table in Modal */
+.order-details .company-table {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.order-details .company-table th {
+  font-size: 0.75rem;
+  padding: 0.75rem 1rem;
+}
+
+.order-details .company-table td {
+  padding: 0.75rem 1rem;
+}
+
+/* Status Update Form */
+.order-details .form-group {
+  margin: 1.25rem 0;
+}
+
+.order-details .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--np-text-secondary);
+  font-size: 0.95rem;
+  font-family: var(--np-font-heading);
+}
+
+.order-details .form-group select,
+.order-details .form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--np-border);
+  border-radius: var(--np-radius-lg);
+  background: var(--np-bg-primary);
+  color: var(--np-text-primary);
+  font-family: var(--np-font-sans);
+  font-size: 1rem;
+  transition: all var(--np-transition-fast);
+}
+
+.order-details .form-group select:focus,
+.order-details .form-group textarea:focus {
+  outline: none;
+  border-color: var(--np-primary);
+  background: var(--np-bg-glass);
+  box-shadow: var(--np-border-glow), 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.order-details .form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.6;
+}
+
+/* Modal Actions */
+.order-details .modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: var(--np-border);
+  justify-content: flex-end;
+}
+
+/* =========================================
+   📱 Responsive Design
+   ========================================= */
+@media (max-width: 1024px) {
+  .order-details .detail-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .order-details .detail-row label {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-lg {
+    max-width: 95% !important;
+    margin: 0.5rem;
+  }
+
+  .order-details .modal-actions {
+    flex-direction: column;
+  }
+
+  .order-details .modal-actions button {
+    width: 100%;
+  }
+
+  .company-table {
+    font-size: 0.85rem;
+  }
+
+  .company-table th,
+  .company-table td {
+    padding: 0.6rem 0.85rem;
+  }
+}
+
+/* =========================================
+   ♿ Accessibility
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+
+  .payment-badge,
+  .delivery-badge,
+  .order-details .detail-row {
+    transition: none !important;
+  }
+}
+
+/* Focus Visible */
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--np-primary);
+  outline-offset: 2px;
+}
